@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.aalh.calculadora.presentation.calculator.Calculator
+import com.aalh.calculadora.presentation.calculator.CalculatorViewModel
 import com.aalh.calculadora.ui.theme.CalculadoraTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CalculadoraTheme {
-                Calculator()
+                Calculator(CalculatorViewModel())
             }
         }
     }
