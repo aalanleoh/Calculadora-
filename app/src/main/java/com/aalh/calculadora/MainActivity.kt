@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CalculadoraTheme {
+            CalculadoraTheme() {
                 Calculator(CalculatorViewModel())
             }
         }

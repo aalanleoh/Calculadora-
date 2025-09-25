@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,40 +16,51 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.aalh.calculadora.presentation.components.CustomButton
 import com.aalh.calculadora.ui.theme.CalculadoraTheme
 
 @Composable
 fun Calculator(viewModel: CalculatorViewModel) {
     val display by viewModel.display.collectAsState()
+    val historicalDisplay by viewModel.historicalDisplay.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 5.dp, vertical = 10.dp)
-            .background(Color.Yellow),
+            .background(MaterialTheme.colorScheme.surfaceContainerLow),
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Spacer(modifier = Modifier.weight(1f))
         Text(
+            text = historicalDisplay,
+            style = MaterialTheme.typography.displaySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.fillMaxWidth()
+                .weight(1f),
+            textAlign = TextAlign.End,
+            maxLines = 1
+        )
+        Text(
             text = display,
             style = MaterialTheme.typography.displayLarge,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(2f),
+                .weight(1f),
             textAlign = TextAlign.End,
-            maxLines = 2
+            maxLines = 1
         )
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .weight(1f)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
             Spacer(modifier = Modifier.weight(3f))
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
-                text = "Borrar",
-                buttonColor = Color.LightGray,
-                textColor = Color.Black,
+                text = "⌫",
+                buttonColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
                 onTap = { viewModel.deleteNumber() }
             )
         }
@@ -65,15 +74,15 @@ fun Calculator(viewModel: CalculatorViewModel) {
                 modifier = Modifier
                     .weight(1f),
                 text = "C",
-                buttonColor = Color.LightGray,
-                textColor = Color.Black,
-                onTap = { viewModel.CleanDisplay() }
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
+                textColor = MaterialTheme.colorScheme.onSurface,
+                onTap = { viewModel.cleanDisplay() }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "()",
-                buttonColor = Color.LightGray,
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
                 textColor = Color.Black,
                 onTap = {}
             )
@@ -81,17 +90,17 @@ fun Calculator(viewModel: CalculatorViewModel) {
                 modifier = Modifier
                     .weight(1f),
                 text = "%",
-                buttonColor = Color.LightGray,
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
                 textColor = Color.Black,
-                onTap = {}
+                onTap = {viewModel.selectedOperation("%")}
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "÷",
-                buttonColor = Color.LightGray,
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
                 textColor = Color.Black,
-                onTap = { viewModel.SelectedOperation("÷") }
+                onTap = { viewModel.selectedOperation("÷") }
             )
         }
 
@@ -105,33 +114,33 @@ fun Calculator(viewModel: CalculatorViewModel) {
                 modifier = Modifier
                     .weight(1f),
                 text = "7",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(7) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(7) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "8",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(8) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(8) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "9",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(9) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(9) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
-                text = "X",
-                buttonColor = Color.LightGray,
+                text = "x",
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
                 textColor = Color.Black,
-                onTap = { viewModel.SelectedOperation("X") }
+                onTap = { viewModel.selectedOperation("x") }
             )
         }
         Row(
@@ -144,33 +153,33 @@ fun Calculator(viewModel: CalculatorViewModel) {
                 modifier = Modifier
                     .weight(1f),
                 text = "4",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(4) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(4) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "5",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(5) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(5) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "6",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(6) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(6) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "-",
-                buttonColor = Color.LightGray,
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
                 textColor = Color.Black,
-                onTap = { viewModel.SelectedOperation("-") }
+                onTap = { viewModel.selectedOperation("-") }
             )
         }
         Row(
@@ -183,33 +192,33 @@ fun Calculator(viewModel: CalculatorViewModel) {
                 modifier = Modifier
                     .weight(1f),
                 text = "1",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(1) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(1) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "2",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(2) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(2) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "3",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(3) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(3) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "+",
-                buttonColor = Color.LightGray,
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
                 textColor = Color.Black,
-                onTap = { viewModel.SelectedOperation("+") }
+                onTap = { viewModel.selectedOperation("+") }
             )
         }
         Row(
@@ -221,33 +230,33 @@ fun Calculator(viewModel: CalculatorViewModel) {
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
-                text = "+",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
+                text = "±",
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
+                textColor = MaterialTheme.colorScheme.onSurface,
                 onTap = {}
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "0",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
-                onTap = { viewModel.NumberClicked(0) }
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
+                onTap = { viewModel.numberClicked(0) }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = ".",
-                buttonColor = Color.Gray,
-                textColor = Color.White,
+                buttonColor = MaterialTheme.colorScheme.inversePrimary,
+                textColor = MaterialTheme.colorScheme.onSurface,
                 onTap = { viewModel.point() }
             )
             CustomButton(
                 modifier = Modifier
                     .weight(1f),
                 text = "=",
-                buttonColor = Color.Green,
-                textColor = Color.White,
+                buttonColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                textColor = MaterialTheme.colorScheme.surfaceBright,
                 onTap = { viewModel.onEqualsClick() }
             )
         }
